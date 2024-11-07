@@ -15,6 +15,8 @@ namespace SocialNetwork.API.Registers
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+
         }
     }
    

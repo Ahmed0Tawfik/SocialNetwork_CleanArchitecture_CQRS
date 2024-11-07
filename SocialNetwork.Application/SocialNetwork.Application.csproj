@@ -6,4 +6,24 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PostCQ\CommandHandler\" />
+    <Folder Include="PostCQ\Command\" />
+    <Folder Include="PostCQ\DTO\" />
+    <Folder Include="PostCQ\QueryHandler\" />
+    <Folder Include="PostCQ\Query\" />
+    <Folder Include="UserProfileCQ\Query\" />
+    <Folder Include="UserProfileCQ\QueryHandler\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SocialNetwork.DAL\SocialNetwork.DAL.csproj" />
+    <ProjectReference Include="..\SocialNetwork.Domain\SocialNetwork.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

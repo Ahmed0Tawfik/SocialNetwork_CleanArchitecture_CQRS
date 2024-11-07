@@ -12,8 +12,8 @@ namespace SocialNetwork.Domain.Models.UserProfileDomain
         {
             
         }
-        public string Country { get; private set; }
-        public string City { get; private set; }
+        public string? Country { get; private set; }
+        public string? City { get; private set; }
 
         public static Location Create(string country, string city)
         {

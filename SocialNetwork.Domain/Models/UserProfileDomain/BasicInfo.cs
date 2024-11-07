@@ -14,7 +14,6 @@ namespace SocialNetwork.Domain.Models.UserProfileDomain
         }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        public string EmailAddress { get; private set; }
         public string PhoneNumber { get; private set; }
         public string? Bio { get; private set; }
         public string? ProfilePicture { get; private set; }
@@ -29,7 +28,6 @@ namespace SocialNetwork.Domain.Models.UserProfileDomain
             {
                 FirstName = firstName,
                 LastName = lastName,
-                EmailAddress = emailAddress,
                 PhoneNumber = phoneNumber,
                 Bio = bio,
                 ProfilePicture = profilePicture,
