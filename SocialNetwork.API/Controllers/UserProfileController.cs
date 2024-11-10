@@ -23,7 +23,7 @@ namespace SocialNetwork.API.Controllers
 
 
 
-        [HttpGet(ApiRoutes.UserProfile.GetById)]
+        [HttpGet(ApiRoutes.UserProfile.IdRoute)]
         public async Task<IActionResult> GetUserProfileById(string id)
         {
             var query = new GetUserProfileByIdQuery(Guid.Parse(id));
@@ -58,6 +58,17 @@ namespace SocialNetwork.API.Controllers
             var profiles = _mapper.Map<IEnumerable<UserProfileCreateDTO>>(response);  
             
             return Ok(profiles);
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UserProfileUpdateDTO profileReq)
+        {
+            var command = _mapper.Map<UpdateUserProfileCommand> (profileReq);
+            var result = await _mediator.Send(command);
+
+            var response = _mapper.Map<UserProfileCreateDTO>(result);
+
+            return Ok(response);
         }
 
        

@@ -12,7 +12,7 @@
 
         public class UserProfile
         {
-            public const string GetById = "{id}";
+            public const string IdRoute = "{id}";
         }
     }
 }
