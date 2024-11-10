@@ -2,15 +2,15 @@
 
 namespace SocialNetwork.Application.UserProfileCQ.DTO
 {
-    public record BasicInfoDTO
+    public class BasicInfoDTO
     {
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string PhoneNumber { get; private set; }
-        public string? Bio { get; private set; }
-        public string? ProfilePicture { get; private set; }
-        public string? CoverPicture { get; private set; }
-        public Location? Location { get; private set; }
-        public DateTime DateOfBirth { get; private set; }
+        public string FirstName { get;  set; }
+        public string LastName { get;  set; }
+        public string PhoneNumber { get;  set; }
+        public string? Bio { get;  set; }
+        public string? ProfilePicture { get;  set; }
+        public string? CoverPicture { get;  set; }
+        public Location? Location { get;  set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

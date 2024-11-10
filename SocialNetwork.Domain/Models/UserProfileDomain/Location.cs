@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Models.UserProfileDomain
 {
     public class Location
     {
+       
+        public string? Country { get;  set; }
+        public string? City { get;  set; }
+
+        [JsonConstructor]
         private Location()
         {
             
         }
-        public string? Country { get; private set; }
-        public string? City { get; private set; }
-
         public static Location Create(string country, string city)
         {
             //TODO ADD VALIDATION, ERROR HANDILING ,ERROR NOTIFIY

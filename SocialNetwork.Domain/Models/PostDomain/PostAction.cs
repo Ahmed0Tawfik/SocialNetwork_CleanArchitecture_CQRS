@@ -2,10 +2,9 @@
 
 namespace SocialNetwork.Domain.Models.PostDomain
 {
-    public class PostAction
+    public class PostAction : BaseEntity
     {
         private PostAction() { }
-        public Guid Id { get; private set; }
         public Guid PostId { get; private set; }
         public Guid UserProfileId { get; private set; }
         public PostActionType Type { get; private set; }

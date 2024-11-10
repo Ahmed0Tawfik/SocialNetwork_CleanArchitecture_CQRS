@@ -1,10 +1,12 @@
-﻿namespace SocialNetwork.Application.UserProfileCQ.DTO
+﻿using System.Data;
+
+namespace SocialNetwork.Application.UserProfileCQ.DTO
 {
-    public record UserProfileCreateDTO
+    public class UserProfileCreateDTO
     {
-        public BasicInfoDTO BasicInfo { get; set; }
-        public string EmailAddress { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
+        public BasicInfoDTO BasicInfoReq { get; set; }
+        public Guid? UserProfileID { get; set; }
+        public DateTime? DateCreated { get; set; }
+        public DateTime? LastSeen { get; set; }
     }
 }

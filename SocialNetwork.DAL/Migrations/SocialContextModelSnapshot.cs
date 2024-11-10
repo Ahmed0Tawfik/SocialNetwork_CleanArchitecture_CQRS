@@ -404,10 +404,6 @@ namespace SocialNetwork.DAL.Migrations
                             b1.Property<DateTime>("DateOfBirth")
                                 .HasColumnType("datetime2");
 
-                            b1.Property<string>("EmailAddress")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
                             b1.Property<string>("FirstName")
                                 .IsRequired()
                                 .HasMaxLength(50)
@@ -438,11 +434,9 @@ namespace SocialNetwork.DAL.Migrations
                                         .HasColumnType("uniqueidentifier");
 
                                     b2.Property<string>("City")
-                                        .IsRequired()
                                         .HasColumnType("nvarchar(max)");
 
                                     b2.Property<string>("Country")
-                                        .IsRequired()
                                         .HasColumnType("nvarchar(max)");
 
                                     b2.HasKey("BasicInfoUserProfileId");

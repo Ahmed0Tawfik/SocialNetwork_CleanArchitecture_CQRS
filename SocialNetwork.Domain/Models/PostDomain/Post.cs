@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Domain.Models.PostDomain
 {
-    public class Post
+    public class Post : BaseEntity
     {
         
         private Post()
@@ -10,7 +10,6 @@ namespace SocialNetwork.Domain.Models.PostDomain
             Comments = new List<PostComment>();
             Actions = new List<PostAction>();
         }
-        public Guid Id { get; private set; }
         public Guid UserProfileId { get; private set; }
         public string? Content { get; private set; }
         public DateTime DateCreated { get; private set; }

@@ -4,11 +4,10 @@ using SocialNetwork.Domain.Models.UserProfileDomain;
 
 namespace SocialNetwork.Domain.Models.PostDomain
 {
-    public class PostComment
+    public class PostComment : BaseEntity
     {
 
         private PostComment() { }
-        public Guid Id { get; private set; }
         public Guid PostId { get; private set; }
         public string Content { get; private set; }
         public DateTime DateCreated { get; private set; }

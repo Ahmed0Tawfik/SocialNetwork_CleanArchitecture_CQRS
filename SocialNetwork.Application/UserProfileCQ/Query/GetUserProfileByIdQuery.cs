@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SocialNetwork.Application.UserProfileCQ.DTO;
 using SocialNetwork.Domain.Models.UserProfileDomain;
 using System;
 using System.Collections.Generic;
@@ -7,8 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialNetwork.Application.UserProfileCQ.Command
+namespace SocialNetwork.Application.UserProfileCQ.Query
 {
-    public record CreateUserCommand(BasicInfoDTO BasicInfoReq) : IRequest<UserProfile>;
+    public record GetUserProfileByIdQuery(Guid UserProfileId) : IRequest<UserProfile>;
     
 }

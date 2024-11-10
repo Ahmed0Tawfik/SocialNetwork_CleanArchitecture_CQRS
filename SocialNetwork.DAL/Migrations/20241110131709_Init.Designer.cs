@@ -12,8 +12,8 @@ using SocialNetwork.DAL;
 namespace SocialNetwork.DAL.Migrations
 {
     [DbContext(typeof(SocialContext))]
-    [Migration("20241107143615_init")]
-    partial class init
+    [Migration("20241110131709_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -407,10 +407,6 @@ namespace SocialNetwork.DAL.Migrations
                             b1.Property<DateTime>("DateOfBirth")
                                 .HasColumnType("datetime2");
 
-                            b1.Property<string>("EmailAddress")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
                             b1.Property<string>("FirstName")
                                 .IsRequired()
                                 .HasMaxLength(50)
@@ -441,11 +437,9 @@ namespace SocialNetwork.DAL.Migrations
                                         .HasColumnType("uniqueidentifier");
 
                                     b2.Property<string>("City")
-                                        .IsRequired()
                                         .HasColumnType("nvarchar(max)");
 
                                     b2.Property<string>("Country")
-                                        .IsRequired()
                                         .HasColumnType("nvarchar(max)");
 
                                     b2.HasKey("BasicInfoUserProfileId");

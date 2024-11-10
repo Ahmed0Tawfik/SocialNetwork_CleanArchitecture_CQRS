@@ -1,4 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
 using SocialNetwork.API.Extensions;
+using SocialNetwork.Application;
 
 namespace SocialNetwork.API
 {
@@ -10,6 +12,7 @@ namespace SocialNetwork.API
 
             // Add services to the container.
             builder.RegisterService(typeof(Program));
+
 
             var app = builder.Build();
 

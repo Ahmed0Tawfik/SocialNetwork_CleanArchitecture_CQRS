@@ -21,7 +21,7 @@ namespace SocialNetwork.Domain.Models.UserProfileDomain
         public Location? Location { get; private set; }
         public DateTime DateOfBirth { get; private set; }
 
-        public static BasicInfo Create(string firstName, string lastName, string emailAddress, string phoneNumber, Location location, DateTime dateOfBirth, string bio = "", string profilePicture = "", string coverPicture = "")
+        public static BasicInfo Create(string firstName, string lastName, string phoneNumber, Location location, DateTime dateOfBirth, string bio = "", string profilePicture = "", string coverPicture = "")
         {
             //TODO ADD VALIDATION, ERROR HANDILING ,ERROR NOTIFIY
             return new BasicInfo

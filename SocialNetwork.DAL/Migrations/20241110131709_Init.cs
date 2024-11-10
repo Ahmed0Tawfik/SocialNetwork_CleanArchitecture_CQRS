@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SocialNetwork.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,7 +72,6 @@ namespace SocialNetwork.DAL.Migrations
                     IdentityId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasicInfo_FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     BasicInfo_LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BasicInfo_EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasicInfo_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BasicInfo_Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BasicInfo_ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),

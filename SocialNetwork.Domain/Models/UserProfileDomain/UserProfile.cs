@@ -1,11 +1,10 @@
 ﻿namespace SocialNetwork.Domain.Models.UserProfileDomain
 {
-    public class UserProfile
+    public class UserProfile : BaseEntity
     {
         private UserProfile()
         {
         }
-        public Guid Id { get; private set; }
         public string IdentityId { get; private set; }
         public BasicInfo BasicInfo { get; private set; }
         public DateTime DateCreated { get; private set; }
