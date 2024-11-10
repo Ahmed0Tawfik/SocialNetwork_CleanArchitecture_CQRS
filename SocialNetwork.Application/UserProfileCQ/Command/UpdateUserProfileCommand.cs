@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SocialNetwork.Application.Response;
 using SocialNetwork.Application.UserProfileCQ.DTO;
 using SocialNetwork.Domain.Models.UserProfileDomain;
 using System;
@@ -9,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.UserProfileCQ.Command
 {
-    public record UpdateUserProfileCommand(BasicInfoDTO BasicInfoReq, Guid UserProfileId) : IRequest<UserProfile>;
+    public record UpdateUserProfileCommand(BasicInfoDTO BasicInfoReq, Guid UserProfileId) : IRequest<OperationResult<UserProfile>>;
   
 }
