@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Application.UserProfileCQ.DTO
 {
-    public class UserProfileCreateDTO
+    public class UserProfileCreateResponseDTO
     {
         public BasicInfoDTO BasicInfoReq { get; set; }
         public Guid? UserProfileID { get; set; }

@@ -9,8 +9,9 @@ namespace SocialNetwork.API.MappingProfiles
     {
         public UserProfileMapping()
         {
-            CreateMap<UserProfileCreateDTO, CreateUserCommand>();
-            CreateMap<UserProfile, UserProfileCreateDTO>()
+            CreateMap<UserProfileCreateResponseDTO, CreateUserCommand>();
+            CreateMap<UserProfileCreateRequestDTO, CreateUserCommand>();
+            CreateMap<UserProfile, UserProfileCreateResponseDTO>()
                 .ForMember(dest => dest.UserProfileID, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.BasicInfoReq, opt => opt.MapFrom(src => src.BasicInfo))
                 .ReverseMap();

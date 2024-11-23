@@ -30,23 +30,46 @@ namespace SocialNetwork.API.Controllers
             var query = new GetUserProfileByIdQuery(Guid.Parse(id));
            
             
-            var response = await _mediator.Send(query);
+            var result = await _mediator.Send(query);
 
-            if (response == null)
-                return NotFound();
+            if (result.IsError)
+            {
+                if (result.Errors.Any(x => x.Code == ErrorCode.NotFound))
+                {
+                    return NotFound(result.Errors.FirstOrDefault(e => e.Code == ErrorCode.NotFound).Message);
+                }
 
-            var profile = _mapper.Map<UserProfileCreateDTO>(response);
+                if (result.Errors.Any(x => x.Code == ErrorCode.ServerError))
+                {
+                    return NotFound(result.Errors.FirstOrDefault(e => e.Code == ErrorCode.ServerError).Message);
+                }
+            }
+
+            var profile = _mapper.Map<UserProfileCreateResponseDTO>(result.Payload);
 
             return Ok(profile);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreateDTO profileReq)
+        public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreateRequestDTO profileReq)
         {
             var command = _mapper.Map<CreateUserCommand>(profileReq);
             var result = await _mediator.Send(command);
 
-            var response = _mapper.Map<UserProfileCreateDTO>(result);
+            if (result.IsError)
+            {
+                if (result.Errors.Any(x => x.Code == ErrorCode.NotFound))
+                {
+                    return NotFound(result.Errors.FirstOrDefault(e => e.Code == ErrorCode.NotFound).Message);
+                }
+
+                if (result.Errors.Any(x => x.Code == ErrorCode.ServerError))
+                {
+                    return NotFound(result.Errors.FirstOrDefault(e => e.Code == ErrorCode.ServerError).Message);
+                }
+            }
+
+            var response = _mapper.Map<UserProfileCreateResponseDTO>(result.Payload);
 
             return CreatedAtAction(nameof(GetUserProfileById),new {id = response.UserProfileID.ToString()},response);
 
@@ -59,15 +82,15 @@ namespace SocialNetwork.API.Controllers
             var query = new GetAllUserProfileQuery();
             var response = await _mediator.Send(query);
 
-            var profiles = _mapper.Map<IEnumerable<UserProfileCreateDTO>>(response);  
+            var profiles = _mapper.Map<IEnumerable<UserProfileCreateResponseDTO>>(response);  
             
             return Ok(profiles);
         }
 
         [HttpPatch]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UserProfileUpdateDTO profileReq)
+        public async Task<IActionResult> UpdateUserProfile(Guid id, [FromBody] BasicInfoDTO profileReq)
         {
-            var command = _mapper.Map<UpdateUserProfileCommand> (profileReq);
+            var command = new UpdateUserProfileCommand(id, profileReq);
 
             var result = await _mediator.Send(command);
 
@@ -85,7 +108,7 @@ namespace SocialNetwork.API.Controllers
                 }
             }
 
-            var response = _mapper.Map<UserProfileCreateDTO>(result);
+            var response = _mapper.Map<UserProfileCreateResponseDTO>(result.Payload);
 
             return Ok(response);
         }

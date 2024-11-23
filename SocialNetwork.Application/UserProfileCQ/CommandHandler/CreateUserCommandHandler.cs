@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
+using SocialNetwork.Application.Enums;
+using SocialNetwork.Application.Response;
 using SocialNetwork.Application.UserProfileCQ.Command;
 using SocialNetwork.Domain.Interfaces;
 using SocialNetwork.Domain.Models.UserProfileDomain;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.UserProfileCQ.CommandHandler
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserProfile>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, OperationResult<UserProfile>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IBaseRepository<UserProfile> _baseRepository;
@@ -21,18 +23,33 @@ namespace SocialNetwork.Application.UserProfileCQ.CommandHandler
             _unitOfWork = unitOfWork;
             _baseRepository = baseRepository;
         }
-        public async Task<UserProfile> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<UserProfile>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var basicInfo = BasicInfo.Create(request.BasicInfoReq.FirstName, request.BasicInfoReq.LastName, request.BasicInfoReq.PhoneNumber,
-                request.BasicInfoReq.Location, request.BasicInfoReq.DateOfBirth, request.BasicInfoReq.Bio, request.BasicInfoReq.ProfilePicture, request.BasicInfoReq.CoverPicture);
-        
-            var userProfile = UserProfile.Create(Guid.NewGuid().ToString() ,basicInfo);
-        
-            await _baseRepository.AddAsync(userProfile);
+            var result = new OperationResult<UserProfile>();
 
-            _unitOfWork.Complete();
+            try
+            {
+
+                var basicInfo = BasicInfo.Create(request.BasicInfoReq.FirstName, request.BasicInfoReq.LastName, request.BasicInfoReq.PhoneNumber,
+                    request.BasicInfoReq.Location, request.BasicInfoReq.DateOfBirth, request.BasicInfoReq.Bio, request.BasicInfoReq.ProfilePicture, request.BasicInfoReq.CoverPicture);
+
+                var userProfile = UserProfile.Create(Guid.NewGuid().ToString(), basicInfo);
+
+
+                await _baseRepository.AddAsync(userProfile);
+                _unitOfWork.Complete();
+                result.Payload = userProfile;
+
+            }
+            catch (Exception ex)
+            {
+                result.IsError = true;
+                var error = new Error { Code = ErrorCode.ServerError, Message = ex.Message };
+                result.Errors.Add(error);
+            }
+
         
-            return userProfile;
+            return result;
         }
     }
 }

@@ -5,6 +5,6 @@ namespace SocialNetwork.Application.UserProfileCQ.DTO
     public class UserProfileUpdateDTO
     {
         public BasicInfoDTO BasicInfoReq { get; set; }
-        public Guid UserProfileId { get; set; }
+       
     }
 }

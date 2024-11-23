@@ -13,6 +13,8 @@ namespace SocialNetwork.API.Registers
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
 

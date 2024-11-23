@@ -17,7 +17,7 @@ namespace SocialNetwork.Application.MappingProfiles
             CreateMap<CreateUserCommand, BasicInfo>();
             CreateMap<CreateUserCommand, UserProfile>();
             CreateMap<CreateUserCommand, Location>();
-            CreateMap<CreateUserCommand, UserProfileCreateDTO>();
+            CreateMap<CreateUserCommand, UserProfileCreateResponseDTO>();
         }
     }
 }

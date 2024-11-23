@@ -10,6 +10,6 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.UserProfileCQ.Command
 {
-    public record UpdateUserProfileCommand(BasicInfoDTO BasicInfoReq, Guid UserProfileId) : IRequest<OperationResult<UserProfile>>;
+    public record UpdateUserProfileCommand(Guid UserProfileId, BasicInfoDTO BasicInfoReq) : IRequest<OperationResult<UserProfile>>;
   
 }
