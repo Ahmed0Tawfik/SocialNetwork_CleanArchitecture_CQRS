@@ -26,6 +26,8 @@ namespace SocialNetwork.DAL.Config
 
                 
             });
+
+            
             
         }
     }

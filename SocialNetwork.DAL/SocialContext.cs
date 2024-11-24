@@ -8,7 +8,7 @@ using SocialNetwork.Domain.Models.UserProfileDomain;
 
 namespace SocialNetwork.DAL
 {
-    public class SocialContext : IdentityDbContext
+    public class SocialContext : IdentityDbContext<UserIdentity>
     {
         public SocialContext(DbContextOptions<SocialContext> options) : base(options)
         {
@@ -23,7 +23,7 @@ namespace SocialNetwork.DAL
             builder.ApplyConfiguration(new UserProfileConfig());
             builder.ApplyConfiguration(new PostCommentConfig());
             builder.ApplyConfiguration(new PostActionConfig());
-
+            builder.ApplyConfiguration(new UserIdentityConfig());
 
 
             base.OnModelCreating(builder);

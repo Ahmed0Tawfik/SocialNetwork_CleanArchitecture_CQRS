@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.API.Configuration
+﻿namespace SocialNetwork.Application
 {
     public class JWTConfig
     {

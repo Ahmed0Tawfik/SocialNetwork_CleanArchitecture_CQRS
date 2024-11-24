@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SocialNetwork.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class initiate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,10 +32,10 @@ namespace SocialNetwork.DAL.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -62,29 +62,6 @@ namespace SocialNetwork.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserProfiles",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdentityId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BasicInfo_FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BasicInfo_LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    BasicInfo_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BasicInfo_Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BasicInfo_ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BasicInfo_CoverPicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BasicInfo_Location_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BasicInfo_Location_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BasicInfo_DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastSeen = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserProfiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,6 +171,35 @@ namespace SocialNetwork.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IdentityId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BasicInfo_FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BasicInfo_LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    BasicInfo_PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BasicInfo_Bio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasicInfo_ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasicInfo_CoverPicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasicInfo_Location_Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasicInfo_Location_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BasicInfo_DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastSeen = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProfiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserProfiles_AspNetUsers_IdentityId",
+                        column: x => x.IdentityId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PostAction",
                 columns: table => new
                 {
@@ -293,6 +299,12 @@ namespace SocialNetwork.DAL.Migrations
                 name: "IX_PostComment_UserProfileId",
                 table: "PostComment",
                 column: "UserProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserProfiles_IdentityId",
+                table: "UserProfiles",
+                column: "IdentityId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -323,13 +335,13 @@ namespace SocialNetwork.DAL.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

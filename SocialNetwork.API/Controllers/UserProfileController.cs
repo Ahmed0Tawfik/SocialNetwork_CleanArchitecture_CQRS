@@ -6,11 +6,13 @@ using SocialNetwork.Application.UserProfileCQ.Command;
 using SocialNetwork.Application.UserProfileCQ.DTO;
 using SocialNetwork.Application.UserProfileCQ.Query;
 using SocialNetwork.Application.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SocialNetwork.API.Controllers
 {
     [Route(ApiRoutes.BaseRoute)]
     [ApiController]
+    [Authorize]
     public class UserProfileController : ControllerBase
     {
         private readonly IMediator _mediator;

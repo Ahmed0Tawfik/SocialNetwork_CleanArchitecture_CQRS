@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using SocialNetwork.API.Configuration;
 using SocialNetwork.Application;
 using SocialNetwork.Application.UserProfileCQ.Query;
 using SocialNetwork.DAL;
 using SocialNetwork.DAL.Repository;
 using SocialNetwork.Domain.Interfaces;
+using SocialNetwork.Domain.Models.UserIdentityDomain;
 using System.Text;
 
 namespace SocialNetwork.API.Registers
@@ -24,6 +25,11 @@ namespace SocialNetwork.API.Registers
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddIdentity<UserIdentity, IdentityRole>()
+                .AddEntityFrameworkStores<SocialContext>()
+                .AddDefaultTokenProviders();
+
 
             builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(ApplicationMediatorEntryPoint).Assembly));
             builder.Services.AddAutoMapper(typeof(Program), typeof(GetAllUserProfileQuery));

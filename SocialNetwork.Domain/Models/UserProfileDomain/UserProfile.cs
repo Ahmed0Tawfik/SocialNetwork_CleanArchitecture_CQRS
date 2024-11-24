@@ -1,4 +1,6 @@
-﻿namespace SocialNetwork.Domain.Models.UserProfileDomain
+﻿using SocialNetwork.Domain.Models.UserIdentityDomain;
+
+namespace SocialNetwork.Domain.Models.UserProfileDomain
 {
     public class UserProfile : BaseEntity
     {
@@ -6,6 +8,7 @@
         {
         }
         public string IdentityId { get; private set; }
+        public UserIdentity UserIdentity { get; private set; }
         public BasicInfo BasicInfo { get; private set; }
         public DateTime DateCreated { get; private set; }
         public DateTime LastSeen { get; private set; }

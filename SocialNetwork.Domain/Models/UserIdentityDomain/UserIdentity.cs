@@ -10,6 +10,6 @@ namespace SocialNetwork.Domain.Models.UserIdentityDomain
 {
     public class UserIdentity : IdentityUser
     {
-        UserProfile UserProfile { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }

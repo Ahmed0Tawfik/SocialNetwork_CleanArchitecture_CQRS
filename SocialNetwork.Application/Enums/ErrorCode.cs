@@ -8,8 +8,12 @@ namespace SocialNetwork.Application.Enums
 {
     public enum ErrorCode
     {
+
+       ValidationFailed = 400,
        NotFound = 404,
+       Conflict = 409,
        ServerError = 500,
+       InvalidData = 422
 
     }
 }
